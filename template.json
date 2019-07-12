@@ -7,14 +7,14 @@
             "type": "string",
             "metadata": { "description": "Azure VM Size" }
         },
-         "adminUsername": {
+         "AdminUsername": {
             "type": "string",
             "defaultValue": "not_important",
             "metadata": {
                 "description": "The name of the administrator of the new VM. Exclusion list: 'admin','administrator'"
             }
         },
-        "adminPassword": {
+        "AdminPassword": {
             "type": "securestring",
             "metadata": {
                 "description": "The password for the administrator account of the new VM"
@@ -77,8 +77,8 @@
                         "disablePasswordAuthentication": false
                     },
                     "secrets": [],
-                    "adminUsername": "[parameters('adminUsername')]",
-                    "adminPassword": "[parameters('adminPassword')]"
+                    "adminUsername": "[parameters('AdminUsername')]",
+                    "adminPassword": "[parameters('AdminPassword')]"
                 },
                 "networkProfile": {
                     "networkInterfaces": [
