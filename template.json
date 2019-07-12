@@ -218,6 +218,6 @@
             },
             "resources": [],
             "dependsOn": []
-        },
+        }
     ]
 }
