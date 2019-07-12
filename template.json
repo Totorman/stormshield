@@ -7,11 +7,19 @@
             "type": "string",
             "metadata": { "description": "Azure VM Size" }
         },
-    	"SNSAdminPassword": {
-            "defaultValue": null,
-            "type": "securestring",
-            "metadata": { "description": "Administration password of the SNS" }
+         "adminUsername": {
+            "type": "string",
+            "defaultValue": "not_important",
+            "metadata": {
+                "description": "The name of the administrator of the new VM. Exclusion list: 'admin','administrator'"
+            }
         },
+        "adminPassword": {
+            "type": "securestring",
+            "metadata": {
+                "description": "The password for the administrator account of the new VM"
+            }
+         },
         "SNSIfPrivateIP": {
             "defaultValue": "10.10.3.10",
             "type": "string",
@@ -65,12 +73,12 @@
                 },
                 "osProfile": {
                     "computerName": "[variables('ComputerName')]",
-                    "adminUsername": "not_important",
                     "linuxConfiguration": {
                         "disablePasswordAuthentication": false
                     },
                     "secrets": [],
-                    "adminPassword": "[parameters('SNSAdminPassword')]"
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]"
                 },
                 "networkProfile": {
                     "networkInterfaces": [
