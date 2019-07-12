@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+    	"SNSAdminPassword": {
+            "value": "KKpedfgd$$$$"
+        },
+    	"VnetName": {
+            "value": "vnet1"
+        },
+        "PublicSubnetName": {
+        	"value": "fwwan"
+        },
+        "PrivateSubnetName": {
+        	"value": "fwlan"
+        },
+        "SNSName": {
+            "value": "sns-gateway"
+        },
+        "SNSIfPublicName": {
+            "value": "sns-gateway-public-nic"
+        },
+        "SNSIfPrivateName": {
+            "value": "sns-gateway-private-nic"
+        },
+        "VmSize": {
+            "value": "Standard_F1"
+        },
+        "PublicIpName": {
+            "value": "sns-gateway-public-ip"
+        },
+        "RouteTableName": {
+            "value": "route-table-private"
+        }
+    }
+}
