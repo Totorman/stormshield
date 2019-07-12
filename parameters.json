@@ -5,7 +5,10 @@
         "VmSize": {
             "value": "Standard_F1",
         },
-    	"SNSAdminPassword": {
+    	"AdminUsername": {
+            "value": "KKpedfgd$$$$",
+        },
+    	"AdminPassword": {
             "value": "KKpedfgd$$$$",
         },
         "SNSIfPrivateIP": {
