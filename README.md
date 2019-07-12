@@ -12,7 +12,7 @@ This Azure Resource Manager template deploys a SNS VM with 2 network interfaces 
 * The virtual network has a public subnet facing Internet and a private subnet for servers
 * A route table is created to route trafic from the private network through the SNS appliance
 
-<img src="img/topo-2nics.png" alt="network topology">
+<img src="img/2nics.png" alt="network topology">
 
 
 ## Next configuration steps:
