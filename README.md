@@ -1,8 +1,8 @@
 # Stormshield Network Security VM with 2 network interfaces
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FTotorman%2Fstormshield%2Ftemplate.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FTotorman%2Fstormshield%2Fmaster%2Ftemplate.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
-</a><a href="http://armviz.io/#/?load=https://raw.githubusercontent.com/Totorman/stormshield/template.json" target="_blank">
+</a><a href="http://armviz.io/#/?load=https://raw.githubusercontent.com/Totorman/stormshield/master/template.json" target="_blank">
   <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
