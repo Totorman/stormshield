@@ -2,14 +2,17 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-    	"SNSAdminPassword": {
-            "value": "KKpedfgd$$$$"
-        },
         "VmSize": {
-            "value": "Standard_F1"
+            "value": "Standard_F1",
         },
-        "RouteTableName": {
-            "value": "route-table-private"
+    	"SNSAdminPassword": {
+            "value": "KKpedfgd$$$$",
+        },
+        "SNSIfPrivateIP": {
+            "value": "10.10.3.10",
+        },
+        "SNSIfPublicIP": {
+            "value": "10.10.4.10",
         }
     }
 }
