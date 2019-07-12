@@ -3,34 +3,9 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
     	"SNSAdminPassword": {
-            "defaultValue": null,
+            "defaultValue": "KKpedfgd$$$$",
             "type": "securestring",
             "metadata": { "description": "Administration password of the SNS" }
-        },
-    	"VnetName": {
-            "defaultValue": "virtual-network",
-            "type": "string",
-            "metadata": { "description": "Name of the virtual network" }
-        },
-        "PublicSubnetName": {
-        	"type": "string",
-        	"defaultValue": "Public",
-        	"metadata": { "description": "Public subnet name" }
-        },
-        "PrivateSubnetName": {
-        	"type": "string",
-        	"defaultValue": "Private",
-        	"metadata": { "description": "Private subnet name" }
-        },
-        "SNSName": {
-            "defaultValue": "sns-gateway",
-            "type": "string",
-            "metadata": { "description": "Name of the SNS virtual machine" }
-        },
-        "SNSIfPublicName": {
-            "defaultValue": "sns-gateway-public-nic",
-            "type": "string",
-            "metadata": { "description": "Name of the SNS VM public interface" }
         },
         "SNSIfPublicIP": {
             "defaultValue": "10.10.4.10",
@@ -52,22 +27,28 @@
             "type": "string",
             "metadata": { "description": "Azure VM Size" }
         },
-        "PublicIpName": {
-            "defaultValue": "sns-gateway-public-ip",
-            "type": "string",
-            "metadata": { "description": "Name of the Public IP" }
-        },
         "RouteTableName": {
             "defaultValue": "route-table-private",
             "type": "string",
             "metadata": { "description": "Name of the Private subnet route table" }
         }
     },
+      "variables": {
+        "SNSName": "sns-gateway",
+        "nic1": "sns-gateway-public-nic",
+        "nic2": "sns-gateway-private-nic",
+        "virtualNetworkName": "vnet1",
+        "PublicSubnetName": "fwwan",
+        "PrivateSubnetName": "fwlan",
+        "PublicIpName": "sns-publicIp",
+        "subnet1Ref": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('PublicSubnetName'))]",
+        "subnet2Ref": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('PrivateSubnetName'))]"
+    },
     "resources": [
         {
             "comments": "SNS VM",
             "type": "Microsoft.Compute/virtualMachines",
-            "name": "[parameters('SNSName')]",
+            "name": "[variables('SNSName')]",
             "apiVersion": "2017-03-30",
             "location": "[resourceGroup().location]",
             "plan": {
@@ -92,8 +73,8 @@
                     "dataDisks": []
                 },
                 "osProfile": {
-                    "computerName": "[parameters('SNSName')]",
-                    "adminUsername": "not_important",
+                    "computerName": "[variables('SNSName')]",
+                    "adminUsername": "adminot",
                     "linuxConfiguration": {
                         "disablePasswordAuthentication": false
                     },
@@ -106,27 +87,27 @@
                         	"properties": {
                                 "primary": true
                             },
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('SNSIfPublicName'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nic1'))]"
                         },
                         {
                         	"properties": {
                                 "primary": false
                             },
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('SNSIfPrivateName'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nic2'))]"
                         }
                     ]
                 }
             },
             "resources": [],
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', parameters('SNSIfPublicName'))]",
-                "[resourceId('Microsoft.Network/networkInterfaces', parameters('SNSIfPrivateName'))]"
+                "[resourceId('Microsoft.Network/networkInterfaces', variables('nic1'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', variables('nic2'))]"
             ]
         },
         {
             "comments": "SNS VM Public nic",
             "type": "Microsoft.Network/networkInterfaces",
-            "name": "[parameters('SNSIfPublicName')]",
+            "name": "[variables('nic1')]",
             "apiVersion": "2016-03-30",
             "location": "[resourceGroup().location]",
             "properties": {
@@ -137,10 +118,10 @@
                             "privateIPAddress": "[parameters('SNSIfPublicIP')]",
                             "privateIPAllocationMethod": "Static",
                             "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('PublicIpName'))]"
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('PublicIpName'))]"
                             },
                             "subnet": {
-                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('VnetName')), '/subnets/', parameters('PublicSubnetName'))]"
+                                "id": "[variables('subnet1Ref')]"
                             }
                         }
                     }
@@ -152,14 +133,13 @@
             },
             "resources": [],
             "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('PublicIpName'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('VnetName'))]"
+                "[resourceId('Microsoft.Network/publicIPAddresses', variables('PublicIpName'))]"
             ]
         },
         {
             "comments": "SNS VM Private nic",
             "type": "Microsoft.Network/networkInterfaces",
-            "name": "[parameters('SNSIfPrivateName')]",
+            "name": "[variables('nic2')]",
             "apiVersion": "2016-03-30",
             "location": "[resourceGroup().location]",
             "properties": {
@@ -170,7 +150,7 @@
                             "privateIPAddress": "[parameters('SNSIfPrivateIP')]",
                             "privateIPAllocationMethod": "Static",
                             "subnet": {
-                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('VnetName')), '/subnets/', parameters('PrivateSubnetName'))]"
+                                "id": "[variables('subnet2Ref')]"
                             }
                         }
                     }
@@ -181,14 +161,12 @@
                 "enableIPForwarding": true
             },
             "resources": [],
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('VnetName'))]"
-            ]
+            "dependsOn": []
         },
         {
             "comments": "SNS VM public IP",
             "type": "Microsoft.Network/publicIPAddresses",
-            "name": "[parameters('PublicIpName')]",
+            "name": "[variables('PublicIpName')]",
             "apiVersion": "2016-03-30",
             "location": "[resourceGroup().location]",
             "properties": {
