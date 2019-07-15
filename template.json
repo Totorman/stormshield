@@ -20,6 +20,11 @@
                 "description": "The password for the administrator account of the new VM"
             }
          },
+        "vnet": {
+            "defaultValue": "se-agrotempo360-vnet",
+            "type": "string",
+            "metadata": { "description": "Virtual Network Name for FW" }
+        },
         "fwlan": {
             "defaultValue": "si_fw_lan",
             "type": "string",
@@ -43,11 +48,11 @@
     },
       "variables": {
         "ComputerName": "sns-gateway",
-        "VirtualNetworkName": "vnet1",
-        "PublicSubnetName": "[variables('fwwan')]",
+        "VirtualNetworkName": "[parameters('vnet')]",
+        "PublicSubnetName": "[parameters('fwwan')]",
         "PublicNicName": "sns-gateway-public-nic",
         "PublicIpName": "sns-publicIp",
-        "PrivateSubnetName": "[variables('fwlan')]",
+        "PrivateSubnetName": "[parameters('fwlan')]",
         "PrivateNicName": "sns-gateway-private-nic",
         "PublicSubnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('PublicSubnetName'))]",
         "PrivateSubnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('PrivateSubnetName'))]",
