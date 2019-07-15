@@ -11,11 +11,17 @@
     	"AdminPassword": {
             "value": "Maxime03!!!!",
         },
+        "fwlan": {
+            "value": "si_fw_lan",
+        },
         "SNSIfPrivateIP": {
-            "value": "10.10.3.10",
+            "value": "172.16.7.238",
+        },
+        "fwwan": {
+            "value": "si_fw_wan",
         },
         "SNSIfPublicIP": {
-            "value": "10.10.4.10",
+            "value": "172.16.7.222",
         }
     }
 }
