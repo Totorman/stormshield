@@ -34,10 +34,10 @@
       "variables": {
         "ComputerName": "sns-gateway",
         "VirtualNetworkName": "vnet1",
-        "PublicSubnetName": "fwwan",
+        "PublicSubnetName": "si_fw_wan",
         "PublicNicName": "sns-gateway-public-nic",
         "PublicIpName": "sns-publicIp",
-        "PrivateSubnetName": "fwlan",
+        "PrivateSubnetName": "si_fw_lan",
         "PrivateNicName": "sns-gateway-private-nic",
         "PublicSubnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('PublicSubnetName'))]",
         "PrivateSubnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('PrivateSubnetName'))]",
