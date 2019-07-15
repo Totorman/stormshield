@@ -20,10 +20,20 @@
                 "description": "The password for the administrator account of the new VM"
             }
          },
+        "fwlan": {
+            "defaultValue": "si_fw_lan",
+            "type": "string",
+            "metadata": { "description": "Subnet for LAN Interface of FW" }
+        },
         "SNSIfPrivateIP": {
             "defaultValue": "172.16.7.238",
             "type": "string",
             "metadata": { "description": "IP address of the SNS VM private interface" }
+        },
+        "fwwan": {
+            "defaultValue": "si_fw_wan",
+            "type": "string",
+            "metadata": { "description": "Subnet for WAN Interface of FW" }
         },
         "SNSIfPublicIP": {
             "defaultValue": "172.16.7.222",
