@@ -21,12 +21,12 @@
             }
          },
         "SNSIfPrivateIP": {
-            "defaultValue": "10.10.3.10",
+            "defaultValue": "172.16.7.238",
             "type": "string",
             "metadata": { "description": "IP address of the SNS VM private interface" }
         },
         "SNSIfPublicIP": {
-            "defaultValue": "10.10.4.10",
+            "defaultValue": "172.16.7.222",
             "type": "string",
             "metadata": { "description": "IP address of the SNS VM public interface" }
         }
@@ -34,10 +34,10 @@
       "variables": {
         "ComputerName": "sns-gateway",
         "VirtualNetworkName": "vnet1",
-        "PublicSubnetName": "si_fw_wan",
+        "PublicSubnetName": "[variables('fwwan')]",
         "PublicNicName": "sns-gateway-public-nic",
         "PublicIpName": "sns-publicIp",
-        "PrivateSubnetName": "si_fw_lan",
+        "PrivateSubnetName": "[variables('fwlan')]",
         "PrivateNicName": "sns-gateway-private-nic",
         "PublicSubnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('PublicSubnetName'))]",
         "PrivateSubnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('PrivateSubnetName'))]",
