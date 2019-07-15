@@ -11,6 +11,9 @@
     	"AdminPassword": {
             "value": "Maxime03!!!!",
         },
+        "vnet": {
+            "value": "se-agrotempo360-vnet",
+        },
         "fwlan": {
             "value": "si_fw_lan",
         },
